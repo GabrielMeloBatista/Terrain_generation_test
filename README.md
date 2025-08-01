@@ -25,7 +25,7 @@ Este projeto é um experimento para criar terrenos 3D suaves e orgânicos no God
     - Emite um sinal mesh_generated para notificar o world.gd de que seu trabalho foi concluído.
 
 ## Melhorias futuras
-- [ ] Carregamento Dinâmico: Adaptar o código para voltar a carregar e descarregar chunks ao redor do jogador para criar um mundo "infinito".
+- [x] Carregamento Dinâmico: Adaptar o código para voltar a carregar e descarregar chunks ao redor do jogador para criar um mundo "infinito".
 - [ ] Nível de Detalhe (LOD): Gerar chunks distantes com menos polígonos para melhorar ainda mais o desempenho.
 - [ ] Biomas: Utilizar múltiplos FastNoiseLite para criar diferentes biomas com características únicas.
 - [ ] Texturização e Materiais: Aplicar materiais mais complexos ao terreno, usando, por exemplo, triplanar mapping para texturas que se adaptam à inclinação do terreno.
