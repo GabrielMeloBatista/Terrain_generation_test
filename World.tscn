@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://cl4op3h7m5l3x"]
+
+[ext_resource type="Script" uid="uid://cvjno4yc053v7" path="res://world.gd" id="1_js7pq"]
+[ext_resource type="PackedScene" uid="uid://cbvh1wvg5xt8h" path="res://chunk.tscn" id="2_eu7l1"]
+[ext_resource type="PackedScene" uid="uid://v5pcys4vid5j" path="res://sky.tscn" id="3_p1v5b"]
+[ext_resource type="Script" uid="uid://s7elfej0vrej" path="res://player.gd" id="4_wygdx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h2yge"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bvp3"]
+
+[node name="World" type="Node3D" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 0)
+script = ExtResource("1_js7pq")
+chunk_scene = ExtResource("2_eu7l1")
+player = NodePath("Player")
+
+[node name="Sky" parent="." instance=ExtResource("3_p1v5b")]
+
+[node name="CheckTimer" type="Timer" parent="."]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+motion_mode = 1
+script = ExtResource("4_wygdx")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_h2yge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_1bvp3")

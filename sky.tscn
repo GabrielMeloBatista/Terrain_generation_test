@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://v5pcys4vid5j"]
+
+[ext_resource type="Shader" uid="uid://dyj661yuay20v" path="res://Sky.gdshader" id="1_dptxg"]
+[ext_resource type="Script" uid="uid://c0t6arx1hkrc7" path="res://sky_randomizer.gd" id="2_py8sg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
+shader = ExtResource("1_dptxg")
+shader_parameter/zenith_color = Color(0.1, 0.2, 0.4, 1)
+shader_parameter/horizon_color = Color(0.7, 0.4, 0.3, 1)
+shader_parameter/nadir_color = Color(0.2, 0.1, 0.2, 1)
+shader_parameter/horizon_blur = 0.1
+shader_parameter/star_color = Color(1, 1, 0.9, 1)
+shader_parameter/star_density = 0.995
+shader_parameter/star_twinkle_speed = 1.0
+shader_parameter/sun_direction = Vector3(0, 0.3, -1)
+shader_parameter/sun_disk_color = Color(1, 0.9, 0.7, 1)
+shader_parameter/sun_halo_color = Color(0.9, 0.6, 0.3, 1)
+shader_parameter/sun_disk_size = 0.998
+shader_parameter/sun_halo_size = 0.85
+shader_parameter/sun_halo_falloff = 8.0
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/cloud_coverage = 0.4
+shader_parameter/cloud_scale = 2.0
+shader_parameter/cloud_speed = 0.05
+shader_parameter/daylight_factor = 1.0
+shader_parameter/night_color = Color(0.01, 0.02, 0.04, 1)
+
+[sub_resource type="Sky" id="Sky_lquwl"]
+sky_material = SubResource("ShaderMaterial_1bvp3")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_lquwl")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 4
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+fog_mode = 1
+fog_density = 1.0
+fog_aerial_perspective = 0.084
+fog_sky_affect = 0.1
+fog_depth_curve = 2.63901
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+volumetric_fog_ambient_inject = 0.79
+volumetric_fog_sky_affect = 0.08
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_h2yge"]
+auto_exposure_enabled = true
+
+[sub_resource type="Compositor" id="Compositor_1bvp3"]
+
+[node name="Sky" type="Node"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.182163, 0.192392, 0.964262, -0.465639, 0.880615, -0.0877363, 0, 0, 0)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1bvp3")
+camera_attributes = SubResource("CameraAttributesPractical_h2yge")
+compositor = SubResource("Compositor_1bvp3")
+
+[node name="sky_randomizer" type="Node3D" parent="." node_paths=PackedStringArray("world_environment", "sun_light")]
+script = ExtResource("2_py8sg")
+world_environment = NodePath("../WorldEnvironment")
+sun_light = NodePath("../DirectionalLight3D")
