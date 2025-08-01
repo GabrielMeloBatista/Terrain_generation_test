@@ -2,11 +2,12 @@
 # Este script usa o algoritmo Marching Cubes para gerar uma malha de terreno suave.
 extends MeshInstance3D
 
+signal mesh_generated
+
 const CHUNK_WIDTH: int = 32
 const CHUNK_HEIGHT: int = 24
 const CHUNK_DEPTH: int = 32
 const CUBE_SIZE: float = 1.0
-
 
 # Multithread support
 var thread: Thread = null
@@ -376,7 +377,6 @@ func _on_chunk_generated(mesh_arrays):
 	var new_mesh = ArrayMesh.new()
 	new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
 	
-	# --- CÓDIGO PARA CORRIGIR OS BURACOS ---
 	# Cria um novo material padrão
 	var material = StandardMaterial3D.new()
 	# Desabilita o descarte de faces, forçando a renderização dos dois lados
@@ -398,13 +398,15 @@ func _on_chunk_generated(mesh_arrays):
 		collision.shape = shape
 		add_child(collision)
 
+		mesh_generated.emit()
+
+
 func _generate_density_data(p_chunk_coord: Vector2i, noise: FastNoiseLite, terrain_amplitude: float, lod_level := 0) -> Array:
 	var lod_factor: int = 1 << lod_level # 0=1, 1=2, 2=4...
 	var width_lod: int = CHUNK_WIDTH / lod_factor
 	var height_lod: int = CHUNK_HEIGHT / lod_factor
 	var depth_lod: int = CHUNK_DEPTH / lod_factor
 
-	# Precisamos de +1 ponto de dados em cada eixo para fechar os cubos na borda
 	var data = []
 	data.resize(width_lod + 1)
 	
