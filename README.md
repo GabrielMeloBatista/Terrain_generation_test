@@ -4,7 +4,7 @@ Este projeto é um experimento para criar terrenos 3D suaves e orgânicos no God
 
 ## Funcionalidades Principais
 - **Geração de Malha com Marching Cubes:** Cria terrenos com aparências suaves e naturais, ideais para cavernas, ilhas flutuantes e paisagens orgânicas.
-- **Terreno Baseado em Ruído: Utiliza FastNoiseLite para determinar a altura e a forma do terreno, permitindo uma grande variedade de paisagens.
+- **Terreno Baseado em Ruído**: Utiliza FastNoiseLite para determinar a altura e a forma do terreno, permitindo uma grande variedade de paisagens.
 - **Multithreading**: Cada "chunk" (pedaço do mundo) tem sua malha e colisão calculadas em uma thread separada. Isso garante que a thread principal do jogo permaneça livre, resultando em uma experiência fluida e sem travamentos.
 - **Geração Estática do Mundo**: O mundo é gerado inteiramente no início, com um tamanho configurável (ex: 5x5 chunks). A lógica de carregamento dinâmico foi removida para focar em um ambiente de tamanho fixo.- Spawn Seguro do Jogador: O jogador só é posicionado no mundo após o chunk inicial ter sua malha de colisão completamente gerada, evitando que ele caia no vazio.
 - **Colisão Automática**: Formas de colisão (ConcavePolygonShape3D) são geradas automaticamente para cada chunk, permitindo a interação física do jogador com o terreno. (não funciona no momento)
