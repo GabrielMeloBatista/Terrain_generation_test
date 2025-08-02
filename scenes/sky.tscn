@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://v5pcys4vid5j"]
 
-[ext_resource type="Shader" uid="uid://dyj661yuay20v" path="res://Sky.gdshader" id="1_dptxg"]
-[ext_resource type="Script" uid="uid://c0t6arx1hkrc7" path="res://sky_randomizer.gd" id="2_py8sg"]
+[ext_resource type="Shader" uid="uid://dyj661yuay20v" path="res://shaders/Sky.gdshader" id="1_dptxg"]
+[ext_resource type="Script" uid="uid://c0t6arx1hkrc7" path="res://scripts/sky_randomizer.gd" id="2_py8sg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
 shader = ExtResource("1_dptxg")
